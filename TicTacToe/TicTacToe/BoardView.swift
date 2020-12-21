@@ -19,33 +19,35 @@ class BoardView: UIView {
     }
     
     private func drawPieces() {
-        drawX()
-        drawO()
+        drawX(col: 0, row: 2)
+        drawO(col: 2, row: 1)
     }
     
-    private func drawX() {
-        let cellCenterX: CGFloat = halfCellSide
-        let cellCenterY: CGFloat = halfCellSide + 4 * halfCellSide
+    private func drawX(col: Int, row: Int) {
+        let center = centerOf(col: col, row: row)
         let path = UIBezierPath()
         
-        path.move(to: CGPoint(x: cellCenterX - halfCellSide * ratio, y: cellCenterY - halfCellSide * ratio))
-        path.addLine(to: CGPoint(x: cellCenterX + halfCellSide * ratio, y: cellCenterY + halfCellSide * ratio))
+        path.move(to: CGPoint(x: center.x - halfCellSide * ratio, y: center.y - halfCellSide * ratio))
+        path.addLine(to: CGPoint(x: center.x + halfCellSide * ratio, y: center.y + halfCellSide * ratio))
         
-        path.move(to: CGPoint(x: cellCenterX + halfCellSide * ratio, y: cellCenterY - halfCellSide * ratio))
-        path.addLine(to: CGPoint(x: cellCenterX - halfCellSide * ratio, y: cellCenterY + halfCellSide * ratio))
+        path.move(to: CGPoint(x: center.x + halfCellSide * ratio, y: center.y - halfCellSide * ratio))
+        path.addLine(to: CGPoint(x: center.x - halfCellSide * ratio, y: center.y + halfCellSide * ratio))
         
         #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).setStroke()
         path.lineWidth = 5
         path.stroke()
     }
     
-    private func drawO() {
-        let cellCenterX: CGFloat = halfCellSide + 2 * halfCellSide
-        let cellCenterY: CGFloat = halfCellSide + 2 * halfCellSide
-        let path = UIBezierPath(arcCenter: CGPoint(x: cellCenterX, y: cellCenterY), radius: halfCellSide * ratio, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+    private func drawO(col: Int, row: Int) {
+        let center = centerOf(col: col, row: row)
+        let path = UIBezierPath(arcCenter: CGPoint(x: center.x, y: center.y), radius: halfCellSide * ratio, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
         #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).setStroke()
         path.lineWidth = 5
         path.stroke()
+    }
+    
+    private func centerOf(col: Int, row: Int) -> CGPoint {
+        return CGPoint(x: halfCellSide + CGFloat(col) * 2 * halfCellSide, y: halfCellSide + CGFloat(2 - row) * 2 * halfCellSide)
     }
     
     private func drawBoard() {
