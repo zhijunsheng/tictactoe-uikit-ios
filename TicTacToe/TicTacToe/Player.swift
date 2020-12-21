@@ -10,4 +10,8 @@ import Foundation
 enum Player {
     case X
     case O
+    
+    func isX() -> Bool {
+        self == .X
+    }
 }
