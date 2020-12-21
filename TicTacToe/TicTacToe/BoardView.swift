@@ -9,6 +9,8 @@ import UIKit
 
 class BoardView: UIView {
     
+    var ticTacToeDelegate: TicTacToeDelegate?
+    
     private var halfCellSide: CGFloat = -1
     private var ratio: CGFloat = 0.7
 
@@ -19,8 +21,17 @@ class BoardView: UIView {
     }
     
     private func drawPieces() {
-        drawX(col: 0, row: 2)
-        drawO(col: 2, row: 1)
+        for row in 0..<2 {
+            for col in 0..<2 {
+                if let piece = ticTacToeDelegate?.pieceAt(col: col, row: row) {
+                    if piece.player.isX() {
+                        drawX(col: col, row: row)
+                    } else {
+                        drawO(col: col, row: row)
+                    }
+                }
+            }
+        }
     }
     
     private func drawX(col: Int, row: Int) {
