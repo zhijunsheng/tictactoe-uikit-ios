@@ -10,7 +10,15 @@ import UIKit
 class BoardView: UIView {
 
     override func draw(_ rect: CGRect) {
+        drawBoard()
+        drawPieces()
+    }
+    
+    private func drawPieces() {
         
+    }
+    
+    private func drawBoard() {
         let path = UIBezierPath()
         
         path.move(to: CGPoint(x: 0, y: bounds.height/3))
