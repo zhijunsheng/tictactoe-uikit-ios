@@ -41,7 +41,6 @@ extension TicTacToe: CustomStringConvertible {
         }
         desc += "  0 1 2"
 
-        
         return desc
     }
 }
