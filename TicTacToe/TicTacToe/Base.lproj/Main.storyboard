@@ -27,6 +27,14 @@
                                     <outletCollection property="gestureRecognizers" destination="Cha-Ym-kW6" appends="YES" id="0oq-bK-6ML"/>
                                 </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbd-qY-pxe">
+                                <rect key="frame" x="16" y="316" width="288" height="53"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <state key="normal" title="Advertise"/>
+                                <connections>
+                                    <action selector="advertise:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u3h-tZ-O2r"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -34,6 +42,9 @@
                             <constraint firstItem="LcF-9K-yGt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="4Wo-bQ-M66"/>
                             <constraint firstItem="LcF-9K-yGt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="HK3-V8-GX4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LcF-9K-yGt" secondAttribute="trailing" constant="16" id="Iep-iR-KFP"/>
+                            <constraint firstItem="Bbd-qY-pxe" firstAttribute="top" secondItem="LcF-9K-yGt" secondAttribute="bottom" constant="8" symbolic="YES" id="dZa-iy-54W"/>
+                            <constraint firstItem="Bbd-qY-pxe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="iiO-ox-Jcw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bbd-qY-pxe" secondAttribute="trailing" constant="16" id="sHv-cx-NMV"/>
                         </constraints>
                     </view>
                     <connections>
