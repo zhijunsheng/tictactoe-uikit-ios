@@ -57,5 +57,11 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>TicTacToe uses the local network to connect players around you</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_gt-tictactoe._tcp</string>
+	</array>
 </dict>
 </plist>

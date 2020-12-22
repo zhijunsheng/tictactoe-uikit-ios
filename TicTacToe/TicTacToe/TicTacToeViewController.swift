@@ -9,11 +9,12 @@ import UIKit
 import MultipeerConnectivity
 
 class TicTacToeViewController: UIViewController {
-    
+    let serviceType = "gt-tictactoe"
     var ticTacToe = TicTacToe()
     
     private var peerID: MCPeerID!
     private var session: MCSession!
+    private var nearbyServiceAdvertiser: MCNearbyServiceAdvertiser!
     
     @IBOutlet weak var boardView: BoardView!
     
@@ -24,10 +25,11 @@ class TicTacToeViewController: UIViewController {
         
         peerID = MCPeerID(displayName: UIDevice.current.name)
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        session.delegate = self
     }
     
     @IBAction func advertise(_ sender: Any) {
-        let nearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "gt-tictactoe")
+        nearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         nearbyServiceAdvertiser.delegate = self
         nearbyServiceAdvertiser.startAdvertisingPeer()
     }
@@ -40,6 +42,12 @@ class TicTacToeViewController: UIViewController {
         print(ticTacToe)
         boardView.setNeedsDisplay()
     }
+    
+    @IBAction func invite(_ sender: Any) {
+        let browser = MCBrowserViewController(serviceType: serviceType, session: session)
+        browser.delegate = self
+        present(browser, animated: true, completion: nil)
+    }
 }
 
 extension TicTacToeViewController: TicTacToeDelegate {
@@ -51,5 +59,37 @@ extension TicTacToeViewController: TicTacToeDelegate {
 extension TicTacToeViewController: MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         invitationHandler(true, session)
+    }
+}
+
+extension TicTacToeViewController: MCBrowserViewControllerDelegate {
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+}
+
+extension TicTacToeViewController: MCSessionDelegate {
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        
     }
 }
