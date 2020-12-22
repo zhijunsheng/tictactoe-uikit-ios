@@ -17,13 +17,15 @@ class TicTacToeViewController: UIViewController {
         super.viewDidLoad()
         
         boardView.ticTacToeDelegate = self
-        
-        ticTacToe.dropAt(col: 1, row: 1)
-        ticTacToe.dropAt(col: 1, row: 0)
-        ticTacToe.dropAt(col: 2, row: 0)
-        ticTacToe.dropAt(col: 0, row: 2)
-        
+    }
+    
+    @IBAction func dropAt(_ sender: UITapGestureRecognizer) {
+        let finger = sender.location(in: boardView)
+        let col: Int = Int(finger.x / (boardView.bounds.width/3))
+        let row: Int = 2 - Int(finger.y / (boardView.bounds.height/3))
+        ticTacToe.dropAt(col: col, row: row)
         print(ticTacToe)
+        boardView.setNeedsDisplay()
     }
 }
 

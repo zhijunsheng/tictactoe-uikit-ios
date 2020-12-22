@@ -19,9 +19,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LcF-9K-yGt" customClass="BoardView" customModule="TicTacToe" customModuleProvider="target">
                                 <rect key="frame" x="16" y="20" width="288" height="288"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LcF-9K-yGt" secondAttribute="height" multiplier="1:1" id="1xG-Sk-lui"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Cha-Ym-kW6" appends="YES" id="0oq-bK-6ML"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -37,6 +41,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Cha-Ym-kW6">
+                    <connections>
+                        <action selector="dropAt:" destination="BYZ-38-t0r" id="WAQ-rq-0m3"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="112.5" y="125"/>
         </scene>
