@@ -41,6 +41,11 @@ class TicTacToeViewController: UIViewController {
         ticTacToe.dropAt(col: col, row: row)
         print(ticTacToe)
         boardView.setNeedsDisplay()
+        
+        let move = "\(col),\(row)" // 0,0
+        if let data = move.data(using: .utf8) {
+            try? session.send(data, toPeers: session.connectedPeers, with: .reliable)
+        }
     }
     
     @IBAction func invite(_ sender: Any) {
@@ -74,22 +79,26 @@ extension TicTacToeViewController: MCBrowserViewControllerDelegate {
 
 extension TicTacToeViewController: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
+        if let moveStr = String(data: data, encoding: .utf8) {
+            let moveArr = moveStr.split(separator: ",")
+            if let col = Int(moveArr[0]), let row = Int(moveArr[1]) {
+                DispatchQueue.main.async {
+                    self.ticTacToe.dropAt(col: col, row: row)
+                    self.boardView.setNeedsDisplay()
+                }
+            }
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        
     }
 }
