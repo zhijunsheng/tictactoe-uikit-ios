@@ -8,10 +8,9 @@
 import Foundation
 
 struct TicTacToe {
-    var piecesBox: Set<Piece> = [
-        Piece(col: 0, row: 1, player: .X),
-        Piece(col: 1, row: 1, player: .O),
-    ]
+    private var playerInTurn: Player = .X
+    
+    var piecesBox: Set<Piece> = []
     
     func pieceAt(col: Int, row: Int) -> Piece? {
         for piece in piecesBox {
@@ -20,6 +19,15 @@ struct TicTacToe {
             }
         }
         return nil
+    }
+    
+    mutating func dropAt(col: Int, row: Int) {
+        guard pieceAt(col: col, row: row) == nil else {
+            return
+        }
+    
+        piecesBox.insert(Piece(col: col, row: row, player: playerInTurn))
+        playerInTurn = playerInTurn.isX() ? .O : .X
     }
 }
 

@@ -21,8 +21,8 @@ class BoardView: UIView {
     }
     
     private func drawPieces() {
-        for row in 0..<2 {
-            for col in 0..<2 {
+        for row in 0..<3 {
+            for col in 0..<3 {
                 if let piece = ticTacToeDelegate?.pieceAt(col: col, row: row) {
                     if piece.player.isX() {
                         drawX(col: col, row: row)

@@ -17,6 +17,12 @@ class TicTacToeViewController: UIViewController {
         super.viewDidLoad()
         
         boardView.ticTacToeDelegate = self
+        
+        ticTacToe.dropAt(col: 1, row: 1)
+        ticTacToe.dropAt(col: 1, row: 0)
+        ticTacToe.dropAt(col: 2, row: 0)
+        ticTacToe.dropAt(col: 0, row: 2)
+        
         print(ticTacToe)
     }
 }
