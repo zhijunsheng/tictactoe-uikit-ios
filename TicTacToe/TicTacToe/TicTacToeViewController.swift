@@ -39,7 +39,7 @@ class TicTacToeViewController: UIViewController {
         let col: Int = Int(finger.x / (boardView.bounds.width/3))
         let row: Int = 2 - Int(finger.y / (boardView.bounds.height/3))
         ticTacToe.dropAt(col: col, row: row)
-        print(ticTacToe)
+        print(ticTacToe, terminator: "\n\n")
         boardView.setNeedsDisplay()
         
         let move = "\(col),\(row)" // 0,0
